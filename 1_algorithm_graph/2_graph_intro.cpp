@@ -1,0 +1,3 @@
+/*
+graph is nothing but connected node by edges
+*/
