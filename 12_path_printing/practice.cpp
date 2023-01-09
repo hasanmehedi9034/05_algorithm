@@ -5,11 +5,13 @@ const int N = 1e5 + 5;
 int visited[N];
 int level[N];
 vector<int> adj_list[N];
+int parent[N];
 
 
 void bfs(int src) {
     visited[src] = 1;
     level[src] = 1;
+    parent[src] = -1;
 
     queue<int>q;
     q.push(src);
@@ -22,6 +24,7 @@ void bfs(int src) {
             if(visited[adj_node] == 0) {
                 visited[adj_node] = 1;
                 level[adj_node] = level[head] + 1;
+                parent[adj_node] = head;
                 q.push(adj_node);
             }
         }
@@ -50,6 +53,21 @@ int main(){
     }
 
     cout << level[5] << endl;
+
+    vector<int>path;
+    int selected_node = 5;
+
+    while(true) {
+        path.push_back(selected_node);
+        if (selected_node == 1) break;
+        selected_node = parent[selected_node];
+    }
+
+    reverse(path.begin(), path.end());
+    for (int node: path) {
+        cout << node << " ";
+    }
+    cout << endl;
 }
 
 
